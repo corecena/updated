@@ -38,13 +38,14 @@ dependencies:
   firebase_auth: ^3.3.14
   firebase_core: ^1.22.0
   cloud_firestore: ^3.1.13
-  web_scraper:
-  flutterwave: ^1.0.3
   pdf: ^3.8.3
   printing: ^5.9.3
   carousel_slider: ^4.1.1
-  flutter_stripe: ^2.0.1
   http: ^0.13.4
+  ade_flutterwave_working_version: ^0.0.2+1
+  firebase_core_platform_interface: 4.5.1
+  flutterwave_standard: ^1.0.6
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

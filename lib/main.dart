@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:miic/auth/main_page.dart';
-import 'package:flutterwave/flutterwave.dart';
 import 'package:miic/pages/bottom_bar.dart';
 
 import 'package:miic/payments/abdul.dart';
@@ -24,9 +23,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-    
+      theme: ThemeData(
+          fontFamily: "Nunito"
+      ),
       home: BotoomBar(),
       
     );

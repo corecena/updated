@@ -44,21 +44,20 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.grey[300],
       body: SafeArea(
           child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey[100],
-          title: Center(
-            child: Column(
-              children:  [
-                Text('YOTICKET' , style:TextStyle(color:  Colors.blue[500])) ,
-                 Text(
-                  'Book your tickets early online',
-                  style: TextStyle(fontSize: 16 , color: Colors.grey[700]),
-                )
-              ],
+            appBar: AppBar(
+              backgroundColor: Colors.grey[100],
+              title: Center(
+                child: Column(
+                  children: [
+                    Text('Yo-Ticket', style: TextStyle(color: Colors.blue[500], fontWeight: FontWeight.w900)),
+                    Text(
+                      'Book your tickets early online',
+                      style: TextStyle(fontSize: 16, color: Colors.grey[700], fontWeight: FontWeight.w900),
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-          leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
-        ),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -72,8 +71,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const Text(
-                  "Hey enter your email and password",
-                  style: TextStyle(fontSize: 18),
+                  "Access your account",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 //email field
                 const SizedBox(height: 50),
@@ -94,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 10.0),
-                //password fireld
+                //password field
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -151,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 168, 132, 12),
+                          color: const Color.fromARGB(255, 168, 132, 12),
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: Text(

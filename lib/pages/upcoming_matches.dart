@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:miic/payments/flutterwave.dart';
+import '../getData/getUpcomingMatches.dart';
 import '../main.dart';
+import 'homePage.dart';
+import 'make_payment.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class upComingMatches extends StatefulWidget {
   const upComingMatches({Key? key}) : super(key: key);
@@ -10,130 +14,75 @@ class upComingMatches extends StatefulWidget {
 }
 
 class _upComingMatchesState extends State<upComingMatches> {
+  //list to hold document ids
+  List<String> docIDs = [];
+
+  //GET THE Document ids
+  Future getDocId() async {
+    await FirebaseFirestore.instance
+        .collection('upcoming')
+        .get()
+        .then((snapshot) => {
+      snapshot.docs.forEach((document) {
+        docIDs.add(document.reference.id);
+      })
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey[100],
+          backgroundColor: Colors.amber,
           title: Center(
             child: Column(
-              children: [
-                Text('YOTICKET', style: TextStyle(color: Colors.blue[500])),
+              children: const [
+                Text('Yo-Ticket', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w900)),
                 Text(
                   'Book your tickets early online',
-                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                  style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w900),
                 )
               ],
             ),
           ),
-          leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
         ),
-        body: ListView.builder(
-            itemCount: 8,
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) => Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 10.0),
-                  child: Card(
-                    elevation: 5.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: 10.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 30.0,
-                                  height: 30.0,
-                                  color: Colors.green,
-                                  child: const CircleAvatar(
-                                      backgroundColor: Colors.grey,
-                                      foregroundColor: Colors.green,
-                                      backgroundImage: NetworkImage(
-                                          "https://viperssc.co.ug/wp-content/uploads/2018/10/new-vipers-logo.png")),
-                                ),
-                                const SizedBox(
-                                  width: 30.0,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      " vipers    Vs   KCC",
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Time: 2 pm",
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 10.0,
-                                          fontWeight: FontWeight.w300),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                ),
-                                Flexible(
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        color: Colors.green,
-                                        child: const CircleAvatar(
-                                          backgroundColor: Colors.green,
-                                          foregroundColor: Colors.green,
-                                          foregroundImage: NetworkImage(
-                                              "https://upload.wikimedia.org/wikipedia/en/c/cd/Kampala_Capital_City_Authority_FC.png"),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 10.0),
-                            child: FlatButton(
-                              onPressed: () {
-                                MyHomePage(title: 'hello');
-                              },
-                              color: Colors.red[200],
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              child: const Text(
-                                "Buy Ticket",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                )));
+        body:
+        Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+          Padding(
+          padding: const EdgeInsets.only(left: 90.0, top: 25.0),
+          child: Row(
+            children: const [
+              Icon(Icons.calendar_month),
+              Text(
+                "Upcoming Matches",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: FutureBuilder(
+            future: getDocId(),
+            builder: (context, snapshot){
+              return ListView.builder(
+                itemCount: docIDs.length,
+                itemBuilder: (context, index){
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(title: GetUpcomingMatches(documentId: docIDs[index])),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    )),
+    );
   }
 }

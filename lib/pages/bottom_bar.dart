@@ -46,10 +46,10 @@ class _BotoomBarState extends State<BotoomBar> {
               activeIcon: Icon(Icons.home_filled),
               label: "Home",
             ),
-            BottomNavigationBarItem(
+            /*BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 activeIcon: Icon(Icons.home_filled),
-                label: "Search"),
+                label: "Search"),*/
             BottomNavigationBarItem(
                 icon: Icon(Icons.airplane_ticket),
                 activeIcon: Icon(Icons.airplane_ticket),
