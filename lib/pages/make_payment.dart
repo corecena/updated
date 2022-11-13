@@ -4,15 +4,18 @@ import 'package:flutterwave_standard/flutterwave.dart';
 import 'package:uuid/uuid.dart';
 
 class MakePayment extends StatefulWidget {
-  const MakePayment({Key? key}) : super(key: key);
+  final Map<String, dynamic> data;
+  const MakePayment({Key? key, required this.data}) : super(key: key);
 
   @override
   State<MakePayment> createState() => _MakePaymentState();
 }
 
 class _MakePaymentState extends State<MakePayment> {
+  Map<String, dynamic> singleMatch = {};
   final formKey = GlobalKey<FormState>();
   final amountController = TextEditingController();
+  final nameController = TextEditingController();
   final currencyController = TextEditingController();
   final ticketTypeController = TextEditingController();
   final countController = TextEditingController();
@@ -35,6 +38,12 @@ class _MakePaymentState extends State<MakePayment> {
     ticketTypeController.text = selectedTicketType;
     //print(countController.value.text);
 
+    singleMatch = widget.data;
+    // print(singleMatch['TeamOne']);
+    // print(singleMatch['TeamTwo']);
+    // print(singleMatch['Stadium']);
+    // print(singleMatch['KickOff']);
+
     if(ticketTypeController.value.text == "Ordinary"){
       amountController.text = "20000";
     } else if(ticketTypeController.value.text == "VIP"){
@@ -47,21 +56,22 @@ class _MakePaymentState extends State<MakePayment> {
 
     if(countController.value.text == "2"){
        var newAmount = int.parse(amountController.text) * int.parse(countController.value.text);
-      print(newAmount);
+      //print(newAmount);
       amountController.text = newAmount.toString();
     } else if(countController.value.text == "4"){
       var newAmount = int.parse(amountController.text) * int.parse(countController.value.text);
-      print(newAmount);
+      //print(newAmount);
       amountController.text = newAmount.toString();
     } else if(countController.value.text == "6"){
       var newAmount = int.parse(amountController.text) * int.parse(countController.value.text);
-      print(newAmount);
+      //print(newAmount);
       amountController.text = newAmount.toString();
     } else if(countController.value.text == "8"){
       var newAmount = int.parse(amountController.text) * int.parse(countController.value.text);
-      print(newAmount);
+      //print(newAmount);
       amountController.text = newAmount.toString();
     }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -81,6 +91,60 @@ class _MakePaymentState extends State<MakePayment> {
           key: formKey,
           child: ListView(
             children: <Widget>[
+              Column(
+                children: [
+                  Text(
+                    '${singleMatch['TeamOne']}'' ' 'Vs' ' ''${singleMatch['TeamTwo']}',
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 19.0,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    '${singleMatch['Stadium']}',
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    'Time: ${singleMatch['KickOff']}',
+                    style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w900),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15.0,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const <Widget>[
+                  Text(
+                    'Ordinary:20,000Ugx',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(width: 10.0,),
+                  Text(
+                    'VIP:50,000Ugx',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(width: 10.0,),
+                  Text(
+                    'VVIP:100,000Ugx',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w900),
+                  ),
+                ],
+              ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: TextFormField(
@@ -138,30 +202,17 @@ class _MakePaymentState extends State<MakePayment> {
                       value!.isNotEmpty ? null : "Currency is required",
                 ),
               ),
-              /*Container(
+              Container(
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: TextFormField(
-                  controller: publicKeyController,
+                  controller: nameController,
                   textInputAction: TextInputAction.next,
-                  style: const TextStyle(color: Colors.black),
-                  obscureText: true,
+                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                   decoration: const InputDecoration(
-                    hintText: "Public Key",
+                    hintText: "Enter your name here",
                   ),
                 ),
-              ),*/
-              /*Container(
-                margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: TextFormField(
-                  controller: encryptionKeyController,
-                  textInputAction: TextInputAction.next,
-                  style: const TextStyle(color: Colors.black),
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    hintText: "Encryption Key",
-                  ),
-                ),
-              ),*/
+              ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: TextFormField(
@@ -184,23 +235,6 @@ class _MakePaymentState extends State<MakePayment> {
                   ),
                 ),
               ),
-              /*Container(
-                width: double.infinity,
-                margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: Row(
-                  children: [
-                    const Text("Use Debug"),
-                    Switch(
-                      onChanged: (value) => {
-                        setState(() {
-                          isTestMode = value;
-                        })
-                      },
-                      value: isTestMode,
-                    ),
-                  ],
-                ),
-              ),*/
               Container(
                 width: double.infinity,
                 height: 50,
@@ -230,7 +264,7 @@ class _MakePaymentState extends State<MakePayment> {
 
   _handlePaymentInitialization() async {
     final Customer customer = Customer(
-        name: "Ticket Client #1",
+        name: nameController.text,
         phoneNumber: phoneNumberController.text,
         email: emailController.text);
 
@@ -245,7 +279,7 @@ class _MakePaymentState extends State<MakePayment> {
         amount: amountController.text.toString().trim(),
         customer: customer,
         paymentOptions: "card, barter, bank transfer, ussd",
-        customization: Customization(title: "Purchase Ticket", description: "You are booking a ticket for the match between Vipers and KCCA FC"),
+        customization: Customization(title: "Purchase Ticket"),
         isTestMode: true);
     final ChargeResponse response = await flutterwave.charge();
     if (response != null) {
@@ -259,8 +293,8 @@ class _MakePaymentState extends State<MakePayment> {
   }
 
   String getPublicKey() {
-    if (isTestMode) return "FLWPUBK_TEST-16029d185fd2edb8519bc0782388a98e-X";
-    return "FLWPUBK_TEST-16029d185fd2edb8519bc0782388a98e-X";
+    if (isTestMode) return "FLWPUBK_TEST-c8f4bd06d9e0a60fcf57545744f9d9a7-X";
+    return "FLWPUBK_TEST-c8f4bd06d9e0a60fcf57545744f9d9a7-X";
   }
 
   void _openBottomSheet() {

@@ -10,11 +10,14 @@ class GetUpcomingMatches extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     CollectionReference upcoming = FirebaseFirestore.instance.collection('upcoming');
+    List<String> teamsSelected = [];
     return FutureBuilder<DocumentSnapshot>(
       future: upcoming.doc(documentId).get(),
       builder: ((context, snapshot){
         if(snapshot.connectionState == ConnectionState.done){
           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+          print(data.values.toList());
+          List<dynamic> matchDetails = data.values.toList();
             //print(data.values.contains(true));
           return Container(
             padding: const EdgeInsets.symmetric(
@@ -66,7 +69,7 @@ class GetUpcomingMatches extends StatelessWidget{
                                   if(data.values.contains(true)) {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(builder: (
-                                            context) => const MakePayment()));
+                                            context) => MakePayment(data: data)));
                                   }
                                 },
                                 style: TextButton.styleFrom(
