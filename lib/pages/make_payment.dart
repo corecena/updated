@@ -293,8 +293,8 @@ class _MakePaymentState extends State<MakePayment> {
   }
 
   String getPublicKey() {
-    if (isTestMode) return "FLWPUBK_TEST-c8f4bd06d9e0a60fcf57545744f9d9a7-X";
-    return "FLWPUBK_TEST-c8f4bd06d9e0a60fcf57545744f9d9a7-X";
+    if (isTestMode) return "FLWPUBK_TEST-ef7bd4f1bd8a112740eb300dd20083d4-X";
+    return "FLWPUBK_TEST-ef7bd4f1bd8a112740eb300dd20083d4-X";
   }
 
   void _openBottomSheet() {

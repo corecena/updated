@@ -16,7 +16,7 @@ class GetUpcomingMatches extends StatelessWidget{
       builder: ((context, snapshot){
         if(snapshot.connectionState == ConnectionState.done){
           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-          print(data.values.toList());
+          //print(data.values.toList());
           List<dynamic> matchDetails = data.values.toList();
             //print(data.values.contains(true));
           return Container(
