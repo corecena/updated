@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.miic">
    <application
-        android:label="miic"
+        android:label="Yo-Ticket"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
