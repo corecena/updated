@@ -232,7 +232,7 @@ class _MakePaymentState extends State<MakePayment> {
     final Customer customer = Customer(
         name: "Ticket Client #1",
         phoneNumber: phoneNumberController.text,
-        email: "rhodin@cranecloud.io");
+        email: emailController.text);
 
     final Flutterwave flutterwave = Flutterwave(
         context: context,
